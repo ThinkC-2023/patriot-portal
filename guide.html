@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dokumentasi — Patriot Ultra Blocker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grid-bg" aria-hidden="true"></div>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="logo-shield">&#x2B21;</span><span class="logo-text">PATRIOT<span class="logo-sub">UB</span></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Beranda</a></li>
+      <li><a href="fitur.html" class="nav-link">Fitur</a></li>
+      <li><a href="dokumentasi.html" class="nav-link active">Dokumentasi</a></li>
+      <li><a href="changelog.html" class="nav-link">Changelog</a></li>
+      <li><a href="https://github.com/thinkc-2023/patriot-portal" class="nav-link nav-gh" target="_blank">GitHub</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="page-hero-tag">// DOKUMENTASI</span>
+  <h1 class="page-hero-title">Panduan <span class="accent">Lengkap</span></h1>
+  <p class="page-hero-desc">Instalasi, konfigurasi, integrasi SIEM, dan panduan Geo IP + Time Control.</p>
+</div>
+
+<div class="doc-layout">
+  <aside class="doc-sidebar">
+    <div class="doc-nav-title">Daftar Isi</div>
+    <ul class="doc-nav-list">
+      <li><a href="#install" class="doc-nav-link active">Instalasi</a></li>
+      <li><a href="#config" class="doc-nav-link">Konfigurasi</a></li>
+      <li><a href="#modules" class="doc-nav-link">Modul</a></li>
+      <li><a href="#geotime" class="doc-nav-link">Geo IP + Time Control</a></li>
+      <li><a href="#siem" class="doc-nav-link">Integrasi SIEM</a></li>
+      <li><a href="#cloud" class="doc-nav-link">Cloud Update</a></li>
+      <li><a href="#quarantine" class="doc-nav-link">Karantina</a></li>
+      <li><a href="#rollback" class="doc-nav-link">AutoRollback</a></li>
+      <li><a href="#paths" class="doc-nav-link">Struktur File</a></li>
+    </ul>
+  </aside>
+
+  <main class="doc-content">
+
+    <div class="doc-section" id="install">
+      <h2 class="doc-h2">Instalasi</h2>
+      <h3 class="doc-h3">Prasyarat</h3>
+      <table class="doc-table">
+        <thead><tr><th>Komponen</th><th>Versi Minimum</th><th>Keterangan</th></tr></thead>
+        <tbody>
+          <tr><td>Windows</td><td>10 / 11 (64-bit)</td><td>Server 2019/2022 juga didukung</td></tr>
+          <tr><td>Hak Akses</td><td>Administrator</td><td>Diperlukan untuk WMI, Firewall, Event Log</td></tr>
+          <tr><td>.NET Framework</td><td>4.x</td><td>Sudah termasuk di Windows 10+</td></tr>
+          <tr><td>Internet</td><td>Opsional</td><td>Diperlukan untuk cloud DB update</td></tr>
+        </tbody>
+      </table>
+      <h3 class="doc-h3">Langkah Instalasi</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Command Prompt (Admin)</span><button class="code-copy" onclick="copyCode(this)" data-code="REM 1. Jalankan installer sebagai Administrator&#10;patriot_setup.exe&#10;&#10;REM 2. Verifikasi instalasi&#10;sc query PatriotUltraBlocker">Copy</button></div>
+        <pre class="code-pre"><span class="c-comment">REM 1. Jalankan installer sebagai Administrator</span>
+patriot_setup.exe
+
+<span class="c-comment">REM 2. Verifikasi instalasi</span>
+sc query PatriotUltraBlocker</pre>
+      </div>
+      <div class="doc-note">Installer memverifikasi SHA-256 setiap binary sebelum ekstraksi. Jangan modifikasi atau repack file installer.</div>
+    </div>
+
+    <div class="doc-section" id="config">
+      <h2 class="doc-h2">Konfigurasi</h2>
+      <p class="doc-p">File konfigurasi utama: <code>%ALLUSERSPROFILE%\Patriot\config.ini</code></p>
+      <h3 class="doc-h3">Threshold Deteksi</h3>
+      <table class="doc-table">
+        <thead><tr><th>Key</th><th>Default</th><th>Deskripsi</th></tr></thead>
+        <tbody>
+          <tr><td><code>scan_interval</code></td><td>8000</td><td>Interval scan normal (ms)</td></tr>
+          <tr><td><code>behavior_suspicious</code></td><td>15</td><td>Skor untuk alert</td></tr>
+          <tr><td><code>behavior_block</code></td><td>30</td><td>Skor untuk blokir otomatis</td></tr>
+          <tr><td><code>kill_cooldown</code></td><td>15000</td><td>Jeda antar-kill PID sama (ms)</td></tr>
+          <tr><td><code>ai_block_score</code></td><td>20</td><td>Skor AI untuk block otomatis</td></tr>
+          <tr><td><code>log_retain_days</code></td><td>30</td><td>Hapus log lebih dari N hari</td></tr>
+          <tr><td><code>backup_quota_mb</code></td><td>2048</td><td>Kuota rollback backup (MB)</td></tr>
+          <tr><td><code>backup_interval_min</code></td><td>5</td><td>Interval snapshot (menit)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-section" id="modules">
+      <h2 class="doc-h2">Modul</h2>
+      <p class="doc-p">Semua modul dapat diaktifkan/dinonaktifkan dari GUI (<strong>Settings &gt; Modules</strong>) atau langsung di config.ini section <code>[modules]</code>.</p>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">config.ini</span><button class="code-copy" onclick="copyCode(this)" data-code="[modules]&#10;behavior_engine=true&#10;lolbin_detect=true&#10;ps_chain=true&#10;net_block=true&#10;ransom_honeypot=true&#10;adaptive_ai=true&#10;attack_chain=true&#10;self_defense=true&#10;cred_dump=true&#10;lateral_move=true&#10;beacon_adv=true&#10;threat_intel=true&#10;event_log=true&#10;adaptive_scan=true&#10;geo_time_control=false">Copy</button></div>
+        <pre class="code-pre"><span class="c-bracket">[modules]</span>
+<span class="c-key">behavior_engine</span>=<span class="c-val">true</span>
+<span class="c-key">lolbin_detect</span>=<span class="c-val">true</span>
+<span class="c-key">net_block</span>=<span class="c-val">true</span>
+<span class="c-key">ransom_honeypot</span>=<span class="c-val">true</span>
+<span class="c-key">adaptive_ai</span>=<span class="c-val">true</span>
+<span class="c-key">attack_chain</span>=<span class="c-val">true</span>
+<span class="c-key">self_defense</span>=<span class="c-val">true</span>
+<span class="c-key">cred_dump</span>=<span class="c-val">true</span>
+<span class="c-key">threat_intel</span>=<span class="c-val">true</span>
+<span class="c-key">event_log</span>=<span class="c-val">true</span>
+<span class="c-key">geo_time_control</span>=<span class="c-val">false</span>  <span class="c-comment">; aktifkan jika perlu</span></pre>
+      </div>
+    </div>
+
+    <div class="doc-section" id="geotime">
+      <h2 class="doc-h2">Geo IP + Time Control</h2>
+      <p class="doc-p">Fitur baru di v1.0.1. Memungkinkan Anda memblokir koneksi masuk berdasarkan <strong>negara asal IP</strong> dan <strong>jadwal waktu</strong> (hari/jam). Sangat berguna untuk membatasi akses SMB/RDP dari luar Indonesia pada akhir pekan.</p>
+      <div class="doc-note">GeoIP lookup menggunakan <strong>ip-api.com</strong> (gratis, 45 req/menit). Hasil di-cache selama 1 jam. IP lokal (192.168.x, 10.x, 172.16-31.x) diizinkan otomatis tanpa lookup.</div>
+      <h3 class="doc-h3">Referensi Hari</h3>
+      <table class="doc-table">
+        <thead><tr><th>Kode</th><th>Hari</th><th>Contoh Penggunaan</th></tr></thead>
+        <tbody>
+          <tr><td><code>0</code></td><td>Minggu</td><td>rule0_days=0,6 (akhir pekan)</td></tr>
+          <tr><td><code>1</code></td><td>Senin</td><td rowspan="5" style="vertical-align:middle">rule1_days=1,2,3,4,5 (hari kerja)</td></tr>
+          <tr><td><code>2</code></td><td>Selasa</td></tr>
+          <tr><td><code>3</code></td><td>Rabu</td></tr>
+          <tr><td><code>4</code></td><td>Kamis</td></tr>
+          <tr><td><code>5</code></td><td>Jumat</td></tr>
+          <tr><td><code>6</code></td><td>Sabtu</td><td>rule0_days=0,6 (akhir pekan)</td></tr>
+        </tbody>
+      </table>
+      <h3 class="doc-h3">Contoh Konfigurasi</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">config.ini — [geotime]</span><button class="code-copy" onclick="copyCode(this)" data-code="[geotime]&#10;enabled=1&#10;allow_countries=ID,SG,MY&#10;rule_count=3&#10;&#10;rule0_name=Block-SMB-Weekend&#10;rule0_days=0,6&#10;rule0_h_start=0&#10;rule0_h_end=23&#10;rule0_ports=445,139&#10;rule0_action=BLOCK&#10;&#10;rule1_name=Block-RDP-Weekend&#10;rule1_days=0,6&#10;rule1_h_start=0&#10;rule1_h_end=23&#10;rule1_ports=3389&#10;rule1_action=BLOCK&#10;&#10;rule2_name=Alert-RDP-Weekday-Night&#10;rule2_days=1,2,3,4,5&#10;rule2_h_start=20&#10;rule2_h_end=6&#10;rule2_ports=3389&#10;rule2_action=ALERT">Copy</button></div>
+        <pre class="code-pre"><span class="c-bracket">[geotime]</span>
+<span class="c-key">enabled</span>=<span class="c-val">1</span>
+<span class="c-key">allow_countries</span>=<span class="c-val">ID,SG,MY</span>   <span class="c-comment">; ISO kode negara diizinkan</span>
+<span class="c-key">rule_count</span>=<span class="c-val">3</span>
+
+<span class="c-comment">; Rule 0: Blokir SMB dari luar negeri saat weekend</span>
+<span class="c-key">rule0_name</span>=<span class="c-val">Block-SMB-Weekend</span>
+<span class="c-key">rule0_days</span>=<span class="c-val">0,6</span>          <span class="c-comment">; 0=Minggu, 6=Sabtu</span>
+<span class="c-key">rule0_h_start</span>=<span class="c-val">0</span>
+<span class="c-key">rule0_h_end</span>=<span class="c-val">23</span>
+<span class="c-key">rule0_ports</span>=<span class="c-val">445,139</span>
+<span class="c-key">rule0_action</span>=<span class="c-val">BLOCK</span>
+
+<span class="c-comment">; Rule 1: Blokir RDP dari luar negeri saat weekend</span>
+<span class="c-key">rule1_ports</span>=<span class="c-val">3389</span>
+<span class="c-key">rule1_action</span>=<span class="c-val">BLOCK</span>
+
+<span class="c-comment">; Rule 2: Alert RDP malam hari kerja (20:00-06:00)</span>
+<span class="c-key">rule2_name</span>=<span class="c-val">Alert-RDP-Night</span>
+<span class="c-key">rule2_days</span>=<span class="c-val">1,2,3,4,5</span>
+<span class="c-key">rule2_h_start</span>=<span class="c-val">20</span>
+<span class="c-key">rule2_h_end</span>=<span class="c-val">6</span>
+<span class="c-key">rule2_ports</span>=<span class="c-val">3389</span>
+<span class="c-key">rule2_action</span>=<span class="c-val">ALERT</span></pre>
+      </div>
+      <h3 class="doc-h3">Port Umum</h3>
+      <table class="doc-table">
+        <thead><tr><th>Port</th><th>Protokol</th><th>Keterangan</th></tr></thead>
+        <tbody>
+          <tr><td><code>445</code></td><td>SMB</td><td>Windows file sharing — target utama ransomware lateral</td></tr>
+          <tr><td><code>139</code></td><td>NetBIOS/SMB</td><td>SMB legacy — sering dieksploitasi bersamaan dengan 445</td></tr>
+          <tr><td><code>3389</code></td><td>RDP</td><td>Remote Desktop Protocol — target brute force paling umum</td></tr>
+          <tr><td><code>5985</code></td><td>WinRM</td><td>PowerShell remoting — lateral movement</td></tr>
+          <tr><td><code>22</code></td><td>SSH</td><td>Jika SSH server aktif di Windows</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-section" id="siem">
+      <h2 class="doc-h2">Integrasi SIEM (Wazuh)</h2>
+      <div class="doc-warn">Koneksi plaintext ke remote host diblokir secara default. Selalu gunakan TLS via stunnel untuk mengirim event ke server Wazuh remote.</div>
+      <h3 class="doc-h3">Konfigurasi Stunnel</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">stunnel.conf</span><button class="code-copy" onclick="copyCode(this)" data-code="[wazuh-tls]&#10;client  = yes&#10;accept  = 127.0.0.1:51514&#10;connect = WAZUH_SERVER_IP:1514&#10;CAfile  = /etc/stunnel/wazuh-ca.crt&#10;verify  = 2">Copy</button></div>
+        <pre class="code-pre"><span class="c-bracket">[wazuh-tls]</span>
+<span class="c-key">client</span>  = <span class="c-val">yes</span>
+<span class="c-key">accept</span>  = <span class="c-val">127.0.0.1:51514</span>
+<span class="c-key">connect</span> = <span class="c-val">WAZUH_SERVER_IP:1514</span>
+<span class="c-key">CAfile</span>  = <span class="c-val">/etc/stunnel/wazuh-ca.crt</span>
+<span class="c-key">verify</span>  = <span class="c-val">2</span></pre>
+      </div>
+      <h3 class="doc-h3">Config Patriot</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">config.ini</span><button class="code-copy" onclick="copyCode(this)" data-code="[siem]&#10;siem_active=true&#10;siem_host=WAZUH_SERVER_IP&#10;siem_port=1514&#10;siem_use_tls_proxy=true&#10;siem_tls_local_port=51514">Copy</button></div>
+        <pre class="code-pre"><span class="c-bracket">[siem]</span>
+<span class="c-key">siem_active</span>=<span class="c-val">true</span>
+<span class="c-key">siem_host</span>=<span class="c-val">WAZUH_SERVER_IP</span>
+<span class="c-key">siem_port</span>=<span class="c-val">1514</span>
+<span class="c-key">siem_use_tls_proxy</span>=<span class="c-val">true</span>
+<span class="c-key">siem_tls_local_port</span>=<span class="c-val">51514</span></pre>
+      </div>
+      <h3 class="doc-h3">Format Event JSON</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Event sample</span></div>
+        <pre class="code-pre">{
+  <span class="c-key">"timestamp"</span>: <span class="c-val">"2026/03/28 14:30:00"</span>,
+  <span class="c-key">"agent"</span>:     <span class="c-val">"patriot"</span>,
+  <span class="c-key">"event"</span>:     <span class="c-val">"process_block"</span>,
+  <span class="c-key">"process"</span>:   <span class="c-val">"mimikatz.exe"</span>,
+  <span class="c-key">"reason"</span>:    <span class="c-val">"EDR Killer tool (SHA256)"</span>,
+  <span class="c-key">"host"</span>:      <span class="c-val">"WORKSTATION-01"</span>
+}</pre>
+      </div>
+      <h3 class="doc-h3">Windows Event Log IDs</h3>
+      <table class="doc-table">
+        <thead><tr><th>Event ID</th><th>Tipe</th><th>Pemicu</th></tr></thead>
+        <tbody>
+          <tr><td><code>1001</code></td><td>BLOCK</td><td>Proses diblokir dan dikarantina</td></tr>
+          <tr><td><code>1002</code></td><td>ALERT</td><td>Aktivitas mencurigakan, skor di bawah threshold block</td></tr>
+          <tr><td><code>1003</code></td><td>RANSOM</td><td>Ransomware terdeteksi (hash atau behavior)</td></tr>
+          <tr><td><code>1004</code></td><td>SELFDEFENSE</td><td>Upaya terminasi Patriot terdeteksi</td></tr>
+          <tr><td><code>1005</code></td><td>INFO</td><td>Event informasional (DB update, startup)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-section" id="cloud">
+      <h2 class="doc-h2">Cloud Update</h2>
+      <p class="doc-p">Database IOC diperbarui dari cloud setiap 6 jam secara async. URL cloud <strong>tidak hardcoded</strong> — disimpan di file <code>urls.dat</code> terenkripsi DPAPI.</p>
+      <table class="doc-table">
+        <thead><tr><th>Database</th><th>File Lokal</th><th>Konten</th></tr></thead>
+        <tbody>
+          <tr><td>Applications</td><td><code>application_security.csv</code></td><td>Hash + nama + kategori tool berbahaya</td></tr>
+          <tr><td>Ransomware</td><td><code>ransomware_hash.csv</code></td><td>Hash + family + level severity</td></tr>
+          <tr><td>Network Denylist</td><td><code>network_denylist.csv</code></td><td>IP/domain + kategori ancaman</td></tr>
+        </tbody>
+      </table>
+      <div class="doc-note">Setiap file diverifikasi SHA-256 via sidecar file sebelum digunakan (fail-closed). Jika sidecar tidak tersedia atau hash tidak cocok, file lama dipertahankan.</div>
+    </div>
+
+    <div class="doc-section" id="quarantine">
+      <h2 class="doc-h2">Karantina</h2>
+      <p class="doc-p">File berbahaya dikarantina dalam format <code>.qtn</code> — terenkripsi AES-256 dengan kunci berbasis ComputerName + UserName + install date. File tersimpan di <code>%ALLUSERSPROFILE%\Patriot\quarantine\</code>.</p>
+      <p class="doc-p">Operasi restore dan whitelist+restore memerlukan verifikasi password administrator. Operasi delete permanen memerlukan konfirmasi eksplisit.</p>
+    </div>
+
+    <div class="doc-section" id="rollback">
+      <h2 class="doc-h2">AutoRollback</h2>
+      <p class="doc-p">Snapshot dokumen diambil setiap 2–30 menit (konfigurasi via <code>backup_interval_min</code>). Saat ransomware terdeteksi dan diblokir, dokumen yang dimodifikasi selama proses berjalan dikembalikan otomatis dari snapshot terakhir.</p>
+      <div class="doc-note">Kuota backup dikontrol via <code>backup_quota_mb</code> (default 2048 MB). Saat kuota penuh, snapshot lama dihapus otomatis (FIFO).</div>
+    </div>
+
+    <div class="doc-section" id="paths">
+      <h2 class="doc-h2">Struktur File</h2>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Direktori instalasi</span></div>
+        <pre class="code-pre">%ALLUSERSPROFILE%\Patriot\
+├── <span class="c-val">config.ini</span>              <span class="c-comment">← Konfigurasi utama</span>
+├── <span class="c-val">patriot_main.pid</span>        <span class="c-comment">← Sentinel file (self-protection)</span>
+├── data\
+│   ├── application_security.csv
+│   ├── ransomware_hash.csv
+│   ├── network_denylist.csv
+│   ├── whitelist.csv
+│   ├── quarantine.csv
+│   ├── hash_cache.csv
+│   ├── baseline.csv
+│   ├── db_version.txt
+│   └── <span class="c-val">urls.dat</span>            <span class="c-comment">← URL cloud (DPAPI encrypted)</span>
+├── quarantine\             <span class="c-comment">← File .qtn (AES-256)</span>
+├── rollback\               <span class="c-comment">← Backup snapshot</span>
+└── logs\
+    ├── 2026-03-28.log
+    └── patriot_agent.log   <span class="c-comment">← SIEM log (rotasi 10MB)</span></pre>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><span class="logo-shield">&#x2B21;</span><span class="logo-text">PATRIOT<span class="logo-sub">UB</span></span></div>
+        <p class="footer-tagline">Melindungi Endpoint, Menjaga Data.<br/>Made in Indonesia 🇮🇩</p>
+      </div>
+      <div class="footer-links-group">
+        <h4 class="footer-group-title">Produk</h4>
+        <a href="fitur.html" class="footer-link">Fitur</a>
+        <a href="dokumentasi.html" class="footer-link">Dokumentasi</a>
+        <a href="changelog.html" class="footer-link">Changelog</a>
+      </div>
+      <div class="footer-links-group">
+        <h4 class="footer-group-title">Developer</h4>
+        <a href="https://github.com/thinkc-2023/patriot-portal" class="footer-link" target="_blank">GitHub</a>
+        <a href="https://github.com/thinkc-2023/patriot-portal/issues" class="footer-link" target="_blank">Report Bug</a>
+      </div>
+      <div class="footer-links-group">
+        <h4 class="footer-group-title">Keamanan</h4>
+        <a href="mailto:security@patriot-ub.id" class="footer-link">Lapor Kerentanan</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Patriot Ultra Blocker · ThinkC</p>
+      <p>Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
