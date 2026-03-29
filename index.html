@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Patriot Ultra Blocker — Made In Indonesia</title>
+<meta name="description" content="Solusi endpoint security & anti-ransomware berbasis Windows untuk organisasi Indonesia. Real-time process monitoring, Geo IP control, Anti-Ransomware."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/main.css"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+</head>
+<body>
+
+<!-- ══ SCANLINE OVERLAY ══ -->
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grid-bg" aria-hidden="true"></div>
+
+<!-- ══ NAV ══ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-shield">⬡</span>
+      <span class="logo-text">THINK-C</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="fitur.html" class="nav-link">Feature</a></li>
+      <li><a href="dokumentasi.html" class="nav-link">Guide</a></li>
+      <li><a href="changelog.html" class="nav-link">Download</a></li>
+      <li><a href="https://github.com/thinkc-2023/patriot-portal" class="nav-link nav-gh" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      ACTIVE PROTECTION · v1.0.1 · Made in Indonesia 🇮🇩
+    </div>
+    <h1 class="hero-title">
+      <span class="hero-title-top">PATRIOT</span>
+      <span class="hero-title-main">ULTRA<br>BLOCKER</span>
+    </h1>
+    <p class="hero-sub">
+      mini-EDR &amp; Anti-Ransomware for Windows.<br/>
+      Real-time Protection · Geo IP Control · Anti-Ransomware
+    </p>
+    <div class="hero-actions">
+      <a href="dokumentasi.html" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Guide
+      </a>
+      <a href="fitur.html" class="btn btn-outline">
+        Feature
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num" data-target="16">0</span>
+        <span class="stat-label">Modul Entries</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat">
+        <span class="stat-num" data-target="3">0</span>
+        <span class="stat-label">Database IOC</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat">
+        <span class="stat-num" data-suffix="K+">100</span>
+        <span class="stat-label">Hash Entries</span>
+      </div>
+      <div class="stat-div"></div>
+      
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="t-dot t-red"></span>
+        <span class="t-dot t-yellow"></span>
+        <span class="t-dot t-green"></span>
+        <span class="t-title">patriot.exe — SHIELD ACTIVE</span>
+      </div>
+      <div class="terminal-body" id="termBody"></div>
+    </div>
+    <div class="vis-ring vis-ring-1"></div>
+    <div class="vis-ring vis-ring-2"></div>
+    <div class="vis-ring vis-ring-3"></div>
+  </div>
+</section>
+
+<!-- ══ THREAT TICKER ══ -->
+<div class="ticker-wrap">
+  <div class="ticker-label">LIVE THREAT FEED</div>
+  <div class="ticker">
+    <div class="ticker-inner" id="ticker">
+      <span>🔴 BLOCKED · mimikatz.exe · EDR Killer Tool · SHA256 match</span>
+      <span>🟡 ALERT · powershell.exe · LOLBin chain detected · Score +15</span>
+      <span>🔴 BLOCKED · wannacry_v2.exe · Ransomware Hash · SHA256 match</span>
+      <span>🟡 ALERT · 185.220.101.42 · Geo Block · CN → Port 3389 · Weekend</span>
+      <span>🔴 BLOCKED · cobalt_beacon.exe · C2 Beacon pattern · Score 31</span>
+      <span>🟡 ALERT · certutil.exe · LOLBin download detected · Score +12</span>
+      <span>🔴 BLOCKED · mass_rename_attack.exe · Rename burst 847 files/4s</span>
+      <span>✅ RESTORED · document.docx · AutoRollback · 3 files recovered</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FEATURES GRID ══ -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// CAPABILITY</div>
+      <h2 class="section-title">Multi-layer <span class="accent">Protection</span></h2>
+      <p class="section-desc">Each threat is handled by a different detection layer — from IOC hash to behavioral AI scoring.</p>
+    </div>
+    <div class="features-grid">
+
+      <div class="feat-card feat-card-large">
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/><path d="M24 8v4M24 36v4M8 24h4M36 24h4" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="24" r="8" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg>
+        </div>
+        <div class="feat-content">
+          <h3 class="feat-title">Real-Time Process Monitor</h3>
+          <p class="feat-desc">Scan the new process every 3–15 seconds with an adaptive rate based on CPU load and threat level. Centralized snapshots prevent bottlenecks.</p>
+          <div class="feat-tags">
+            <span class="tag">SHA-256 + SHA-1</span>
+            <span class="tag">Dual Hash</span>
+            <span class="tag">Adaptive AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 48 48" fill="none"><path d="M24 4L4 14v14c0 10.5 8.6 20.3 20 22.6C35.4 48.3 44 38.5 44 28V14L24 4z" stroke="currentColor" stroke-width="1.5"/><path d="M16 24l5 5 11-11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="feat-title">Anti-Ransomware Engine</h3>
+        <p class="feat-desc">Detection of mass-file operations, high entropy, rename burst, and slow-encrypt patterns. AutoRollback restore documents in seconds.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5"/><path d="M24 6v4M24 38v4M6 24h4M38 24h4M11 11l3 3M34 34l3 3M37 11l-3 3M14 34l-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="24" r="5" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="feat-title">🌏 Geo IP + Time Control</h3>
+        <p class="feat-desc">Block SMB/RDP connections from outside Indonesia on Saturday/Sunday. Up to 20 rules per installation with 1 hour GeoIP cache.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="32" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 16h40M12 24h8M12 30h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="36" cy="27" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M40 31l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="feat-title">SIEM Integration</h3>
+        <p class="feat-desc">Send events to Wazuh via TLS proxy (stunnel). Format JSON, Windows Event Log ID 1001–1005. No cleartext to remote host.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 48 48" fill="none"><path d="M12 4h24v8l4 4v20l-4 4H12l-4-4V16l4-4V4z" stroke="currentColor" stroke-width="1.5"/><path d="M18 20h12M18 27h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="33" cy="27" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="feat-title">Network Denylist</h3>
+        <p class="feat-desc">URLhaus feed from Abuse.ch is updated automatically. Non-blocking batch firewall — does not freeze the scan engine when blocking IP.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 48 48" fill="none"><path d="M8 40V24M16 40V16M24 40V8M32 40V20M40 40V28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="feat-title">Attack Chain Detection</h3>
+        <p class="feat-desc">Multi-stage correlation: download → execute → lateral movement → exfil. Detect EDR killers, credential dumps, and C2 DGA beacons.</p>
+      </div>
+
+      <div class="feat-card feat-card-wide">
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 48 48" fill="none"><path d="M6 36l10-14 8 8 8-12 10 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="22" r="2" fill="currentColor"/><circle cx="24" cy="30" r="2" fill="currentColor"/><circle cx="36" cy="18" r="2" fill="currentColor"/></svg>
+        </div>
+        <div class="feat-content">
+          <h3 class="feat-title">Honeypot Detection + AutoRollback</h3>
+          <p class="feat-desc">Hidden honeypot files in strategic locations (max 20/folder). Access = instant alert. AutoRollback restore malware-modified documents from encrypted snapshot backups.</p>
+          <div class="feat-tags">
+            <span class="tag">AES-256 Quarantine</span>
+            <span class="tag">Snapshot Backup</span>
+            <span class="tag">Max 20 files/folder</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUICK START ══ -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// QUICK START</div>
+      <h2 class="section-title">Deploy in <span class="accent">3 Steps</span></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Download &amp; Run Installer</h3>
+        <p class="step-desc">Run <code>patriot_setup.exe</code> as Administrator. The wizard will guide installation, password set, and module configuration.</p>
+        <div class="step-req">
+          <span class="req-item">Windows 7/10/11 64-bit</span>
+          <span class="req-item">Admin privileges</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Configure &amp; Settings</h3>
+        <p class="step-desc">Configure your backup quota and interval, control your geo-ip & working time and also port allowed.</p>
+        <div class="step-req">
+          <span class="req-item">Backup Settings</span>
+          <span class="req-item">Geo IP + Time Control</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Aktifkan &amp; Monitor</h3>
+        <p class="step-desc">Patriot runs automatically in the system tray. Monitor via the GUI dashboard, Windows Event Log, or send events to Wazuh/SIEM.</p>
+        <div class="step-req">
+	  <span class="req-item">Real-time</span>
+          <span class="req-item">System tray</span>
+          <span class="req-item">SIEM optional</span>
+        </div>
+      </div>
+    </div>
+    <div class="install-code-wrap">
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">Command Prompt (Administrator)</span>
+          <button class="code-copy" onclick="copyCode(this)" data-code="REM Jalankan installer sebagai Administrator&#10;patriot_setup.exe&#10;&#10;REM Silent install (Coming Soon)&#10;patriot_setup.exe /silent /config=&quot;\\server\patriot.ini&quot;">Copy</button>
+        </div>
+        <pre class="code-pre"><span class="c-comment">REM Jalankan installer sebagai Administrator</span>
+patriot_setup.exe
+
+<span class="c-comment">REM Silent install (Coming Soon)</span>
+patriot_setup.exe <span class="c-key">/silent</span> <span class="c-key">/config</span>=<span class="c-val">"\\server\patriot.ini"</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-shield">⬡</span>
+          <span class="logo-text">PATRIOT<span class="logo-sub">ULTRA BLOCKER</span></span>
+        </div>
+        <p class="footer-tagline">mini-EDR & Anti-Ransomware<br/>Made in Indonesia 🇮🇩</p>
+        <div class="footer-badges">
+          <span class="fbadge">Windows 7/10/11</span>
+          <span class="fbadge">v1.0.1</span>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <h4 class="footer-group-title">Produk</h4>
+        <a href="fitur.html" class="footer-link">Feature</a>
+        <a href="dokumentasi.html" class="footer-link">Guide</a>
+        <a href="changelog.html" class="footer-link">Download</a>
+      </div>
+      <div class="footer-links-group">
+        <h4 class="footer-group-title">Developer</h4>
+        <a href="https://github.com/thinkc-2023/patriot-portal" class="footer-link" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:thinkc2023@proton.me" class="footer-link">Report Bug</a>
+        <a href="mailto:thinkc2023@proton.me" class="footer-link">Request Fitur</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Think-C. All rights reserved</p>
+      <p>Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
