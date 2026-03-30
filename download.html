@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Changelog — Patriot Ultra Blocker</title>
+<title>Download — Patriot Ultra Blocker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -13,12 +13,12 @@
 <div class="grid-bg" aria-hidden="true"></div>
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><span class="logo-shield">&#x2B21;</span><span class="logo-text">PATRIOT<span class="logo-sub">UB</span></span></a>
+    <a href="index.html" class="nav-logo"><span class="logo-shield">&#x2B21;</span><span class="logo-text">THINK-C</span></a>
     <ul class="nav-links">
-      <li><a href="index.html" class="nav-link">Beranda</a></li>
-      <li><a href="fitur.html" class="nav-link">Fitur</a></li>
-      <li><a href="dokumentasi.html" class="nav-link">Dokumentasi</a></li>
-      <li><a href="changelog.html" class="nav-link active">Changelog</a></li>
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="feature.html" class="nav-link">Feature</a></li>
+      <li><a href="guide.html" class="nav-link">Guide</a></li>
+      <li><a href="download.html" class="nav-link active">Download</a></li>
       <li><a href="https://github.com/thinkc-2023/patriot-portal" class="nav-link nav-gh" target="_blank">GitHub</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -26,9 +26,9 @@
 </nav>
 
 <div class="page-hero">
-  <span class="page-hero-tag">// RIWAYAT PERUBAHAN</span>
-  <h1 class="page-hero-title">Changelog &amp; <span class="accent">Audit</span></h1>
-  <p class="page-hero-desc">Semua perubahan, perbaikan bug, dan fitur baru. Termasuk hasil audit keamanan lengkap.</p>
+  <span class="page-hero-tag">// PRODUCT DOWNLOAD</span>
+  <h1 class="page-hero-title">Product &amp; <span class="accent">Download</span></h1>
+  <p class="page-hero-desc">All product version.</p>
 </div>
 
 <section class="section" style="padding-top:0">
@@ -56,140 +56,61 @@
         <div class="cl-version-body">
 
           <div>
-            <span class="cl-group-title cl-feat">FITUR BARU</span>
+            <span class="cl-group-title cl-feat">PATRIOT ULTRA BLOCKER</span>
             <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">NEW</span> <strong>patriot_geotime.au3</strong> — Modul Geo IP + Time Control. Blokir koneksi SMB/RDP berdasarkan negara asal dan jadwal hari/jam. Hingga 20 rules, cache GeoIP 1 jam, persist ke config.ini.</li>
-              <li class="cl-item"><span class="cl-item-id">NEW</span> <strong>Honeypot file limit</strong> — Maksimal 20 file honeypot per folder (HONEY_MAX_PER_FOLDER), total 100 file (HONEY_MAX_TOTAL). Counter dihitung dari tracker internal aHoneyFiles[].</li>
+              <li class="cl-item">Modul Geo IP + Time Control.</li>
+              <li class="cl-item">Honeypot file.</li>
+	      <li class="cl-item">SIEM Integration (Wazuh).</li>
+	      <li class="cl-item">Rollback file and folder.</li>
+	      <li class="cl-item">C2 Beacon & DGA Detection.</li>
+	      <li class="cl-item">URLhaus Feed (Abuse.ch).</li>
+	      <li class="cl-item">EDR Killer Detection.</li>
+	      <li class="cl-item">Behavior Engine.</li>
+	      <li class="cl-item">Hash & Process Detection.</li>
+	      <li class="cl-item">Anti-Ransomware Tool.</li>
             </ul>
           </div>
-
-          <div>
-            <span class="cl-group-title cl-fix">CRITICAL FIX</span>
-            <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">C-01</span> <strong>SIEM cleartext diblokir</strong> — Koneksi plaintext ke remote host kini diblokir otomatis. Hanya loopback (127.x) yang diizinkan tanpa TLS. Tambahkan stunnel untuk enkripsi ke server remote.</li>
-              <li class="cl-item"><span class="cl-item-id">C-02</span> <strong>DB integrity fail-closed</strong> — _VerifyCSVIntegrity(): semua 4 kondisi error (sidecar gagal, format invalid, hash gagal, hash mismatch) kini return False. Sebelumnya return True (fail-open).</li>
-            </ul>
-          </div>
-
-          <div>
-            <span class="cl-group-title cl-fix">HIGH FIX</span>
-            <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">H-01</span> <strong>Cloud URL tidak lagi hardcoded</strong> — URL Dropbox dipindah ke urls.dat terenkripsi DPAPI. Source code hanya berisi placeholder kosong.</li>
-              <li class="cl-item"><span class="cl-item-id">H-02</span> <strong>InetGet blocking dihapus</strong> — _UpdateDBFromCloud() dan _SilentSync() menggunakan _InetGetWithFallback() async. Adlib timer tidak lagi dibekukan selama download.</li>
-              <li class="cl-item"><span class="cl-item-id">H-03</span> <strong>SHA256 sidecar async</strong> — Download sidecar menggunakan InetGet mode=1 (async) dengan polling timeout 15 detik + retry 10 detik.</li>
-              <li class="cl-item"><span class="cl-item-id">H-05</span> <strong>Legacy HTTP endpoint dinonaktifkan</strong> — _SendPatriotEvent() tidak lagi melakukan InetRead ke HTTP plaintext. Hanya TCP integration via PSK yang aktif.</li>
-            </ul>
-          </div>
-
-          <div>
-            <span class="cl-group-title cl-fix">MEDIUM FIX</span>
-            <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">M-01</span> <strong>JSON injection dicegah</strong> — _JsonEscape() ditambahkan. Semua field event (proc, reason, host) di-escape sebelum masuk ke JSON string.</li>
-              <li class="cl-item"><span class="cl-item-id">M-02</span> <strong>Restore karantina butuh password</strong> — Operasi restore, whitelist+restore, dan multi-restore sekarang memerlukan verifikasi password via _PasswordDialog() + _VerifyPassword().</li>
-              <li class="cl-item"><span class="cl-item-id">M-03</span> <strong>CSV write atomic</strong> — _RemoveFromQuarantineCsv() menulis ke .tmp dulu, baru atomic rename ke file asli. Mencegah data loss jika crash di tengah write.</li>
-              <li class="cl-item"><span class="cl-item-id">M-04</span> <strong>Array OOB pada whitelist kosong</strong> — Guard if UBound($a) &lt; 2 ditambahkan di _LoadWhitelist(). Counter $idx menggantikan index $i-1 yang rentan slot kosong.</li>
-              <li class="cl-item"><span class="cl-item-id">M-05</span> <strong>DB diverifikasi sebelum dipakai</strong> — _EnsureDB() memanggil _VerifyCSVIntegrity() setelah setiap download. DB yang tidak terverifikasi ditolak.</li>
-            </ul>
-          </div>
-
-          <div>
-            <span class="cl-group-title cl-fix">LOW FIX</span>
-            <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">L-01</span> <strong>Hash cache di-cap 5000 entri</strong> — _SaveHashCache() membatasi output ke 5000 baris. Engine cycle cleanup: RemoveAll jika oHashCache.Count &gt; 5000.</li>
-              <li class="cl-item"><span class="cl-item-id">L-02</span> <strong>URLhaus download async</strong> — _LoadURLhausFeed() mengganti InetGet mode=0 dengan _InetGetWithFallback() timeout 20 detik.</li>
-              <li class="cl-item"><span class="cl-item-id">L-03</span> <strong>Honeypot file limit</strong> — _CreateHoneyFiles() enforce HONEY_MAX_PER_FOLDER=20 dan HONEY_MAX_TOTAL=100.</li>
-              <li class="cl-item"><span class="cl-item-id">L-04</span> <strong>oSlowEncrypt/oRenameBurst time-based eviction</strong> — RemoveAll diganti eviction selektif berdasarkan nilai/timestamp. Tracking aktif tidak terbuang.</li>
-              <li class="cl-item"><span class="cl-item-id">L-05</span> <strong>SIEM log rotasi 10MB</strong> — patriot_agent.log dirotasi ke .old saat melebihi 10MB. File .old lama dihapus sebelum rename.</li>
-              <li class="cl-item"><span class="cl-item-id">L-06</span> <strong>Firewall blocking non-blocking</strong> — _FirewallBlockIP() menggunakan batch queue. _FlushFirewallQueue() di-Adlib setiap 5 detik.</li>
-            </ul>
-          </div>
-
-          <div>
-            <span class="cl-group-title cl-impr">BUGFIX</span>
-            <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">BF-01</span> <strong>_EnsureDB() "If has no matching EndIf"</strong> — If _InetGetWithFallback(...) Then tidak memiliki EndIf pasangan. Diperbaiki: nested If FileExists() di dalam blok If, ditambahkan FileDelete($tmpVer) cleanup.</li>
-              <li class="cl-item"><span class="cl-item-id">BF-02</span> <strong>URLhaus CSV parse konsistensi</strong> — StringSplit pakai "," biasa (bukan '","'), URL di $parts[2] sesuai _UpdateURLhausFeed(). Sebelumnya $parts[0] dengan strip quote manual.</li>
-              <li class="cl-item"><span class="cl-item-id">BF-03</span> <strong>_PasswordDialog() return type</strong> — Fungsi mengembalikan array $ret[2]. Semua pemanggil sekarang bandingkan $res[0] bukan string "OK".</li>
-            </ul>
-          </div>
-
-          <div>
-            <span class="cl-group-title" style="background:rgba(239,68,68,.08);color:#F87171">OPEN ISSUE</span>
-            <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">H-04</span> <strong>Installer hash masih kosong</strong> — Konstanta SETUP_HASH_PATRIOT_EXE, SETUP_HASH_ULTRA_EXE, SETUP_HASH_UNINST_EXE masih string kosong. Supply chain attack via installer tamper dimungkinkan. <em>Dijadwalkan diperbaiki di v1.0.2.</em></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- v1.0.0 -->
-      <div class="cl-version" id="v100">
-        <div class="cl-version-head">
-          <span class="cl-ver-num">v1.0.0</span>
-          <span class="cl-ver-date">Januari 2026</span>
-          <span class="cl-ver-badge cl-stable">STABLE</span>
-          <a href="https://github.com/thinkc-2023/patriot-portal/releases/download/v1.0.0/PatriotUltraBlocker-v1.0.0-setup.exe"
-             class="cl-dl-btn cl-dl-btn--stable" title="Unduh Patriot Ultra Blocker v1.0.0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Unduh v1.0.0
-          </a>
-        </div>
-        <div class="cl-version-body">
-          <div>
-            <span class="cl-group-title cl-feat">RILIS AWAL</span>
-            <ul class="cl-items">
-              <li class="cl-item"><span class="cl-item-id">INIT</span> Rilis pertama Patriot Ultra Blocker. Core engine dengan behavior scoring, hash detection, LOLBin monitoring, dan network denylist.</li>
-              <li class="cl-item"><span class="cl-item-id">INIT</span> AutoRollback dengan snapshot berkala dan restore otomatis saat ransomware terdeteksi.</li>
-              <li class="cl-item"><span class="cl-item-id">INIT</span> Honeypot detection dengan file umpan tersembunyi di 9 lokasi strategis.</li>
-              <li class="cl-item"><span class="cl-item-id">INIT</span> SIEM integration via Wazuh (JSON event format) dan Windows Event Log (ID 1001–1005).</li>
-              <li class="cl-item"><span class="cl-item-id">INIT</span> Cloud database update dengan primary URL + Google Drive mirror fallback.</li>
-              <li class="cl-item"><span class="cl-item-id">INIT</span> GUI lengkap: Overview, Analytics, Modules, Rules, Tools (Quarantine/Whitelist/Log/Rollback), Integration, Settings.</li>
-              <li class="cl-item"><span class="cl-item-id">INIT</span> Self-defense engine: deteksi 22 kill tools, anti-debug, guardian process watchdog.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
 
     </div>
 
   </div>
 </section>
 
+<!-- ══ FOOTER ══ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo"><span class="logo-shield">&#x2B21;</span><span class="logo-text">PATRIOT<span class="logo-sub">UB</span></span></div>
-        <p class="footer-tagline">Melindungi Endpoint, Menjaga Data.<br/>Made in Indonesia 🇮🇩</p>
+        <div class="footer-logo">
+          <span class="logo-shield">⬡</span>
+          <span class="logo-text">PATRIOT<span class="logo-sub">ULTRA BLOCKER</span></span>
+        </div>
+        <p class="footer-tagline">mini-EDR & Anti-Ransomware<br/>Made in Indonesia 🇮🇩</p>
+        <div class="footer-badges">
+          <span class="fbadge">Windows 7/10/11</span>
+          <span class="fbadge">v1.0.1</span>
+        </div>
       </div>
       <div class="footer-links-group">
         <h4 class="footer-group-title">Produk</h4>
-        <a href="fitur.html" class="footer-link">Fitur</a>
-        <a href="dokumentasi.html" class="footer-link">Dokumentasi</a>
-        <a href="changelog.html" class="footer-link">Changelog</a>
+        <a href="feature.html" class="footer-link">Feature</a>
+        <a href="guide.html" class="footer-link">Guide</a>
+        <a href="download.html" class="footer-link">Download</a>
       </div>
       <div class="footer-links-group">
         <h4 class="footer-group-title">Developer</h4>
-        <a href="https://github.com/thinkc-2023/patriot-portal" class="footer-link" target="_blank">GitHub</a>
-        <a href="https://github.com/thinkc-2023/patriot-portal/issues" class="footer-link" target="_blank">Report Bug</a>
-      </div>
-      <div class="footer-links-group">
-        <h4 class="footer-group-title">Keamanan</h4>
-        <a href="mailto:security@patriot-ub.id" class="footer-link">Lapor Kerentanan</a>
+        <a href="https://github.com/thinkc-2023/patriot-portal" class="footer-link" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:thinkc2023@proton.me" class="footer-link">Report Bug</a>
+        <a href="mailto:thinkc2023@proton.me" class="footer-link">Request Fitur</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Patriot Ultra Blocker · ThinkC</p>
-      <p>Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+      <p>© 2026 Think-C. All rights reserved</p>
+      <p>Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
     </div>
   </div>
 </footer>
+
 <script src="js/main.js"></script>
 </body>
 </html>
